@@ -53,7 +53,7 @@ fn_mods_info(){
 	mod_info_sdtdoxide=( MOD sdtdoxide "Oxide for 7 Days To Die" "https://raw.githubusercontent.com/OxideMod/Snapshots/master/Oxide-7DaysToDie.zip" Oxide-7DaysToDie_Linux.zip "${systemdir}" "NA" "7 Days To Die;" "NA" "http://oxidemod.org/downloads/oxide-for-7-days-to-die.813" )
 
 	# REQUIRED: Set all mods info into one array for convenience
-	mods_global_array=( "${mod_info_sourcemod[@]}" "${mod_info_metamod[@]}" "${mod_info_ulib[@]}" "${mod_info_ulx[@]}" "${mod_info_utime[@]}" "${mod_info_uclip[@]}" "${mod_info_acf[@]}" "${mod_info_rustoxide[@]}" "${mod_info_hwoxide[@]}" "${mod_info_sdtdoxide[@]}" )
+	mods_global_array=( "${mod_info_sourcemod[@]}" "${mod_info_metamod[@]}" "${mod_info_ulib[@]}" "${mod_info_ulx[@]}" "${mod_info_utime[@]}" "${mod_info_uclip[@]}" "${mod_info_acf[@]}" "${mod_info_darkrp[@]}" "${mod_info_darkrpmodification[@]}" "${mod_info_rustoxide[@]}" "${mod_info_hwoxide[@]}" "${mod_info_sdtdoxide[@]}" )
 }
 
 # Get a proper URL for mods that don't provide a good one (optional)
