@@ -25,9 +25,9 @@ modseparator="MOD"
 
 # Define mods information (required)
 fn_mods_info(){
-	# REQUIRED: mod_info_name=( MOD "modcommand" "Pretty Name" "URL" "filename" "modsubfolders" "LowercaseOn/Off" "/files/to/keep;" "/install/path" "ENGINES" "GAMES" "NOTGAMES" "AUTHOR_URL" )
-	# Example 1) Well made mod: mod_info_name=( MOD "awesomemod" "This is an Awesome Mod" "https://awesomemod.com/latest.zip" "awesomemod.zip" "0" "LowercaseOff" "OVERWRITE" "${systemdir}/addons" "source;unity3d;" "GAMES" "NOTGAMES" "https://awesomemod.com/" )
-	# Example 2) Poorly made mod: mod_info_name=( MOD "stupidmod" "This is a stupid mod" "${crappymodurl}" "StupidMod.zip" "1" "LowercaseOn" "cfg;data/crappymod;" "${systemdir}" "source;" "GAMES" "Garry's mod;Counter-Strike: Source;" )
+	# REQUIRED: mod_info_name=( MOD "modcommand" "Pretty Name" "URL" "filename" "modsubfolders" "LowercaseOn/Off" "/files/to/keep;" "/install/path" "ENGINES" "GAMES" "NOTGAMES" "AUTHOR_URL" "Short Description" )
+	# Example 1) Well made mod: mod_info_name=( MOD "awesomemod" "This is an Awesome Mod" "https://awesomemod.com/latest.zip" "awesomemod.zip" "0" "LowercaseOff" "OVERWRITE" "${systemdir}/addons" "source;unity3d;" "GAMES" "NOTGAMES" "https://awesomemod.com/" "This mod knows that 42 is the answer" )
+	# Example 2) Poorly made mod: mod_info_name=( MOD "stupidmod" "This is a stupid mod" "${crappymodurl}" "StupidMod.zip" "1" "LowercaseOn" "cfg;data/crappymod;" "${systemdir}" "source;" "GAMES" "Garry's mod;Counter-Strike: Source;" "This mod is dumber than dumb" )
 	# None of those values can be empty
 	# [index]	| Usage
 	# [0] 	| MOD: separator, all mods must begin with it
@@ -43,25 +43,26 @@ fn_mods_info(){
 	# [10] 	| "Supported Games;": list them according to LGSM ${gamename} variables, separated and ended with a semicolon, or use GAMES to ignore the value 
 	# [11]	| "Unsupported Games;": list them according to LGSM ${gamename} variables, separated and ended with a semicolon, or use NOTGAMES to ignore the value (useful to exclude a game when using Supported Engines)
 	# [12]	| "AUTHOR_URL" is the author's website, displayed to the user when chosing mods to install
+	# [13]	| "Short Description" a description showed to the user upon installation
 
 	# Source mods
-	mod_info_sourcemod=( MOD "sourcemod" "SourceMod" "${sourcemodurl}" "${sourcemodlatestfile}" "0" "LowercaseOff" "${systemdir}" "cfg;" "source;" "GAMES" "Garry's Mod;" "http://www.sourcemod.net" )
-	mod_info_metamod=( MOD "metamod" "MetaMod" "${metamodurl}" "${metamodlatestfile}" "0" "LowercaseOff" "${systemdir}" "OVERWRITE" "source;" "GAMES" "Garry's Mod;" "https://www.sourcemm.net" )
+	mod_info_metamod=( MOD "metamod" "MetaMod" "${metamodurl}" "${metamodlatestfile}" "0" "LowercaseOff" "${systemdir}" "OVERWRITE" "source;" "GAMES" "Garry's Mod;" "https://www.sourcemm.net" "Plugins Framework" )
+	mod_info_sourcemod=( MOD "sourcemod" "SourceMod" "${sourcemodurl}" "${sourcemodlatestfile}" "0" "LowercaseOff" "${systemdir}" "cfg;" "source;" "GAMES" "Garry's Mod;" "http://www.sourcemod.net" "Admin Features (requires MetaMod)" )
 	# Garry's Mod Addons
-	mod_info_ulib=( MOD "ulib" "ULib" "https://codeload.github.com/TeamUlysses/ulib/zip/master" "ulib-master.zip" "0" "LowercaseOff" "${systemdir}/addons" "OVERWRITE" "ENGINES" "Garry's Mod;" "NOTGAMES" "http://ulyssesmod.net" )
-	mod_info_ulx=( MOD "ulx" "ULX" "https://codeload.github.com/TeamUlysses/ulx/zip/master" "ulx-master.zip" "0" "LowercaseOff" "${systemdir}/addons" "OVERWRITE" "ENGINES" "Garry's Mod;" "NOTGAMES" "http://ulyssesmod.net" )
-	mod_info_utime=( MOD "utime" "UTime" "https://github.com/TeamUlysses/utime/archive/master.zip" "utime-master.zip" "0" "LowercaseOff" "${systemdir}/addons" "OVERWRITE" "ENGINES" "Garry's Mod;" "NOTGAMES" "http://ulyssesmod.net" )
-	mod_info_uclip=( MOD "uclip" "UClib" "https://github.com/TeamUlysses/uclip/archive/master.zip" "uclip-master.zip" "0" "LowercaseOff" "${systemdir}/addons" "OVERWRITE" "ENGINES" "Garry's Mod;" "NOTGAMES" "http://ulyssesmod.net" )
-	mod_info_acf=( MOD "acf" "ACF" "https://github.com/nrlulz/ACF/archive/master.zip" "acf-master.zip" "0" "LowercaseOn" "${systemdir}/addons" "OVERWRITE" "ENGINES" "Garry's Mod;" "NOTGAMES" "https://github.com/nrlulz/ACF" )
-	mod_info_acf_missiles=( MOD "acfmissiles" "ACF Missiles" "https://github.com/Bubbus/ACF-Missiles/archive/master.zip" "acf-missiles-master.zip" "0" "LowercaseOn" "${systemdir}/addons" "OVERWRITE" "ENGINES" "Garry's Mod;" "NOTGAMES" "https://github.com/Bubbus/ACF-Missiles" )
-	mod_info_acf_sweps=( MOD "acfsweps" "ACF SWEPs" "https://github.com/Bubbus/ACF-SWEPs/archive/master.zip" "acf-sweps-master.zip" "0" "LowercaseOn" "${systemdir}/addons" "OVERWRITE" "ENGINES" "Garry's Mod;" "NOTGAMES" "https://github.com/Bubbus/ACF-SWEPs" )
-	mod_info_acf_advdupe2=( MOD "advdupe2" "Advanced Duplicator 2" "https://github.com/wiremod/advdupe2/archive/master.zip" "advdupe2-master.zip" "0" "LowercaseOn" "${systemdir}/addons" "OVERWRITE" "ENGINES" "Garry's Mod;" "NOTGAMES" "http://www.wiremod.com" )
-	mod_info_darkrp=( MOD "darkrp" "DarkRP Gamemode" "https://github.com/FPtje/DarkRP/archive/master.zip" "darkrp-master.zip" "0" "LowercaseOn" "${systemdir}/addons" "OVERWRITE" "ENGINES" "Garry's Mod;" "NOTGAMES" "http://darkrp.com" )
-	mod_info_darkrpmodification=( MOD "darkrpmodification" "DarkRP Modification" "https://github.com/FPtje/darkrpmodification/archive/master.zip" "darkrpmodification-master.zip" "0" "LowercaseOff" "${systemdir}/addons" "NOUPDATE" "ENGINES" "Garry's Mod;" "NOTGAMES" "http://darkrp.com" )
+	mod_info_ulib=( MOD "ulib" "ULib" "https://codeload.github.com/TeamUlysses/ulib/zip/master" "ulib-master.zip" "0" "LowercaseOff" "${systemdir}/addons" "OVERWRITE" "ENGINES" "Garry's Mod;" "NOTGAMES" "http://ulyssesmod.net" "Developer Library / Framework" )
+	mod_info_ulx=( MOD "ulx" "ULX" "https://codeload.github.com/TeamUlysses/ulx/zip/master" "ulx-master.zip" "0" "LowercaseOff" "${systemdir}/addons" "OVERWRITE" "ENGINES" "Garry's Mod;" "NOTGAMES" "http://ulyssesmod.net" "Admin Panel (requires ULib)" )
+	mod_info_utime=( MOD "utime" "UTime" "https://github.com/TeamUlysses/utime/archive/master.zip" "utime-master.zip" "0" "LowercaseOff" "${systemdir}/addons" "OVERWRITE" "ENGINES" "Garry's Mod;" "NOTGAMES" "http://ulyssesmod.net" "Keep track of players play time" )
+	mod_info_uclip=( MOD "uclip" "UClib" "https://github.com/TeamUlysses/uclip/archive/master.zip" "uclip-master.zip" "0" "LowercaseOff" "${systemdir}/addons" "OVERWRITE" "ENGINES" "Garry's Mod;" "NOTGAMES" "http://ulyssesmod.net" "An alternative to noclip" )
+	mod_info_acf=( MOD "acf" "Armoured Combat Framework" "https://github.com/nrlulz/ACF/archive/master.zip" "acf-master.zip" "0" "LowercaseOn" "${systemdir}/addons" "OVERWRITE" "ENGINES" "Garry's Mod;" "NOTGAMES" "https://github.com/nrlulz/ACF" "Realistic Wepons & Engines" )
+	mod_info_acf_missiles=( MOD "acfmissiles" "ACF Missiles" "https://github.com/Bubbus/ACF-Missiles/archive/master.zip" "acf-missiles-master.zip" "0" "LowercaseOn" "${systemdir}/addons" "OVERWRITE" "ENGINES" "Garry's Mod;" "NOTGAMES" "https://github.com/Bubbus/ACF-Missiles" "More missiles for ACF" )
+	mod_info_acf_sweps=( MOD "acfsweps" "ACF SWEPs" "https://github.com/Bubbus/ACF-SWEPs/archive/master.zip" "acf-sweps-master.zip" "0" "LowercaseOn" "${systemdir}/addons" "OVERWRITE" "ENGINES" "Garry's Mod;" "NOTGAMES" "https://github.com/Bubbus/ACF-SWEPs" "More SWEPs for ACF" )
+	mod_info_acf_advdupe2=( MOD "advdupe2" "Advanced Duplicator 2" "https://github.com/wiremod/advdupe2/archive/master.zip" "advdupe2-master.zip" "0" "LowercaseOn" "${systemdir}/addons" "OVERWRITE" "ENGINES" "Garry's Mod;" "NOTGAMES" "http://www.wiremod.com" "Save your constructions" )
+	mod_info_darkrp=( MOD "darkrp" "DarkRP Gamemode" "https://github.com/FPtje/DarkRP/archive/master.zip" "darkrp-master.zip" "0" "LowercaseOn" "${systemdir}/addons" "OVERWRITE" "ENGINES" "Garry's Mod;" "NOTGAMES" "http://darkrp.com" "Most popular gamemode" )
+	mod_info_darkrpmodification=( MOD "darkrpmodification" "DarkRP Modification" "https://github.com/FPtje/darkrpmodification/archive/master.zip" "darkrpmodification-master.zip" "0" "LowercaseOff" "${systemdir}/addons" "NOUPDATE" "ENGINES" "Garry's Mod;" "NOTGAMES" "http://darkrp.com" "The only proper way to customize DarkRP settings" )
 	# Oxidemod
-	mod_info_rustoxide=( MOD "rustoxide" "Oxide for Rust" "https://raw.githubusercontent.com/OxideMod/Snapshots/master/Oxide-Rust.zip" "Oxide-Rust_Linux.zip" "0" "LowercaseOff" "${systemdir}" "OVERWRITE" "ENGINES" "Rust;" "NOTGAMES" "http://oxidemod.org/downloads/oxide-for-rust.1659" )
-	mod_info_hwoxide=( MOD "hwoxide" "Oxide for Hurtworld" "https://raw.githubusercontent.com/OxideMod/Snapshots/master/Oxide-Hurtworld.zip" "Oxide-Hurtworld_Linux.zip" "0" "LowercaseOff" "${systemdir}" "OVERWRITE" "ENGINES" "Hurtworld;" "NOTGAMES" "http://oxidemod.org/downloads/oxide-for-hurtworld.1332" )
-	mod_info_sdtdoxide=( MOD "sdtdoxide" "Oxide for 7 Days To Die" "https://raw.githubusercontent.com/OxideMod/Snapshots/master/Oxide-7DaysToDie.zip" "Oxide-7DaysToDie_Linux.zip" "0" "LowercaseOff" "${systemdir}" "OVERWRITE" "ENGINES" "7 Days To Die;" "NOTGAMES" "http://oxidemod.org/downloads/oxide-for-7-days-to-die.813" )
+	mod_info_rustoxide=( MOD "rustoxide" "Oxide for Rust" "https://raw.githubusercontent.com/OxideMod/Snapshots/master/Oxide-Rust.zip" "Oxide-Rust_Linux.zip" "0" "LowercaseOff" "${systemdir}" "OVERWRITE" "ENGINES" "Rust;" "NOTGAMES" "http://oxidemod.org/downloads/oxide-for-rust.1659" "Allows for the use of plugins" )
+	mod_info_hwoxide=( MOD "hwoxide" "Oxide for Hurtworld" "https://raw.githubusercontent.com/OxideMod/Snapshots/master/Oxide-Hurtworld.zip" "Oxide-Hurtworld_Linux.zip" "0" "LowercaseOff" "${systemdir}" "OVERWRITE" "ENGINES" "Hurtworld;" "NOTGAMES" "http://oxidemod.org/downloads/oxide-for-hurtworld.1332" "Allows for the use of plugins" )
+	mod_info_sdtdoxide=( MOD "sdtdoxide" "Oxide for 7 Days To Die" "https://raw.githubusercontent.com/OxideMod/Snapshots/master/Oxide-7DaysToDie.zip" "Oxide-7DaysToDie_Linux.zip" "0" "LowercaseOff" "${systemdir}" "OVERWRITE" "ENGINES" "7 Days To Die;" "NOTGAMES" "http://oxidemod.org/downloads/oxide-for-7-days-to-die.813" "Allows for the use of plugins" )
 
 	# REQUIRED: Set all mods info into one array for convenience
 	mods_global_array=( "${mod_info_sourcemod[@]}" "${mod_info_metamod[@]}" "${mod_info_ulib[@]}" "${mod_info_ulx[@]}" "${mod_info_utime[@]}" "${mod_info_uclip[@]}" "${mod_info_acf[@]}" "${mod_info_acf_missiles[@]}" "${mod_info_acf_sweps[@]}" "${mod_info_advdupe2[@]}" "${mod_info_darkrp[@]}" "${mod_info_darkrpmodification[@]}" "${mod_info_rustoxide[@]}" "${mod_info_hwoxide[@]}" "${mod_info_sdtdoxide[@]}" )
@@ -69,17 +70,17 @@ fn_mods_info(){
 
 # Get a proper URL for mods that don't provide a good one (optional)
 fn_mods_scrape_urls(){
+	# Metamod
+	metamodscrapeurl="http://www.gsptalk.com/mirror/sourcemod"
+	metamodlatestfile="$(wget "${metamodscrapeurl}/?MD" -q -O -| grep "mmsource" | grep "\-linux" | head -n1 | awk -F '>' '{ print $3 }' | awk -F '<' '{ print $1}')"
+	metamodfasterurl="http://cdn.probablyaserver.com/sourcemod/"
+	metamodurl="${metamodfasterurl}/${metamodlatestfile}"
 	# Sourcemod
 	sourcemodmversion="1.8"
 	sourcemodscrapeurl="http://www.gsptalk.com/mirror/sourcemod"
 	sourcemodlatestfile="$(wget "${sourcemodscrapeurl}/?MD" -q -O -| grep "sourcemod-" | grep "\-linux" | head -n1 | awk -F '>' '{ print $3 }' | awk -F '<' '{ print $1}')"
 	sourcemodfasterurl="http://cdn.probablyaserver.com/sourcemod/"
 	sourcemodurl="${sourcemodfasterurl}/${sourcemodlatestfile}"
-	# Metamod
-	metamodscrapeurl="http://www.gsptalk.com/mirror/sourcemod"
-	metamodlatestfile="$(wget "${metamodscrapeurl}/?MD" -q -O -| grep "mmsource" | grep "\-linux" | head -n1 | awk -F '>' '{ print $3 }' | awk -F '<' '{ print $1}')"
-	metamodfasterurl="http://cdn.probablyaserver.com/sourcemod/"
-	metamodurl="${metamodfasterurl}/${metamodlatestfile}"
 }
 
 # Define all variables from a mod at once when index is set to a separator
@@ -102,6 +103,7 @@ fi
 	modgames="${mods_global_array[index+10]}"
 	modexcludegames="${mods_global_array[index+11]}"
 	modsite="${mods_global_array[index+12]}"
+	moddescription="${mods_global_array[index+13]}"
 }
 
 
@@ -190,10 +192,10 @@ fn_mods_available(){
 	# First, reset variables
 	compatiblemodslist=()
 	availablemodscommands=()
-	modprettynamemaxlengh="0"
-	modsitemaxlengh="0"
-	modfilenamemaxlengh="0"
-	modcommandmaxlengh="0"
+	modprettynamemaxlength="0"
+	modsitemaxlength="0"
+	moddescriptionmaxlength="0"
+	modcommandmaxlength="0"
 	# Find compatible games
 	# Find separators through the global array
 	for ((index="0"; index <= ${#mods_global_array[@]}; index++)); do
@@ -206,14 +208,14 @@ fn_mods_available(){
 			# If game is compatible
 			if [ "${modcompatibility}" == "1" ]; then
 				# Put it into the list to display to the user
-				compatiblemodslist+=( "${modprettyname}" "${modcommand}" "${modfilename}" "${modsite}" )
+				compatiblemodslist+=( "${modprettyname}" "${modcommand}" "${moddescription}" "${modsite}" )
 				# Keep available commands in an array
 				availablemodscommands+=( "${modcommand}" )
-				# Find max lenghs for user output to be put into nice regular tables
-				modprettynamemaxlengh=$((${#modprettyname}>${modprettynamemaxlengh}?${#modprettyname}:${modprettynamemaxlengh}))
-				modcommandmaxlengh=$((${#modcommand}>${modcommandmaxlengh}?${#modcommand}:${modcommandmaxlengh}))
-				modfilenamemaxlengh=$((${#modfilename}>${modfilenamemaxlengh}?${#modfilename}:${modfilenamemaxlengh}))
-				modsitemaxlengh=$((${#modsite}>${modsitemaxlengh}?${#modsite}:${modsitemaxlengh}))
+				# Find max lengths for user output to be put into nice regular tables
+				modprettynamemaxlength=$((${#modprettyname}>${modprettynamemaxlength}?${#modprettyname}:${modprettynamemaxlength}))
+				modcommandmaxlength=$((${#modcommand}>${modcommandmaxlength}?${#modcommand}:${modcommandmaxlength}))
+				moddescriptionmaxlength=$((${#moddescription}>${moddescriptionmaxlength}?${#moddescription}:${moddescriptionmaxlength}))
+				modsitemaxlength=$((${#modsite}>${modsitemaxlength}?${#modsite}:${modsitemaxlength}))
 			fi
 		fi
 	done
@@ -226,13 +228,13 @@ fn_mods_show_available(){
 	spaces=" "
 	# As long as we're within index values
 	while [ "${compatiblemodslistindex}" -lt "${#compatiblemodslist[@]}" ]; do
-		# Pretty Name ${modprettynamemaxlengh}
-		echo -en "\e[1m${compatiblemodslist[compatiblemodslistindex]}\e[0m${spaces:$(($modprettynamemaxlengh-${#compatiblemodslist[compatiblemodslistindex]}))} | "
-		# Command ${modcommandmaxlengh}
+		# Pretty Name ${modprettynamemaxlength}
+		echo -en "\e[1m${compatiblemodslist[compatiblemodslistindex]}\e[0m${spaces:$(($modprettynamemaxlength-${#compatiblemodslist[compatiblemodslistindex]}))} | "
+		# Command ${modcommandmaxlength}
 		echo -en "\e[36m${compatiblemodslist[compatiblemodslistindex+1]}\e[0m | "
-		# File Name ${modfilenamemaxlengh}
+		# File Name ${moddescriptionmaxlength}
 		echo -en "${compatiblemodslist[compatiblemodslistindex+2]} | "
-		# Website ${modsitemaxlengh}
+		# Website ${modsitemaxlength}
 		echo -e "${compatiblemodslist[compatiblemodslistindex+3]}"
 		# Increment index from the amount of values we just displayed
 		let "compatiblemodslistindex+=4"
