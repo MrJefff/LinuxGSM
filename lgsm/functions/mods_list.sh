@@ -228,7 +228,7 @@ fn_mods_show_available(){
 	# As long as we're within index values
 	while [ "${compatiblemodslistindex}" -lt "${#compatiblemodslist[@]}" ]; do
 		# Pretty Name ${modprettynamemaxlengh}
-		echo -e "\e[1m${compatiblemodslist[compatiblemodslistindex]}\e[0m${spaces:$(($modprettynamemaxlengh-${#compatiblemodslist[compatiblemodslistindex]}))} |"
+		echo -en "\e[1m${compatiblemodslist[compatiblemodslistindex]}\e[0m${spaces:$(($modprettynamemaxlengh-${#compatiblemodslist[compatiblemodslistindex]}))} |"
 		# Command ${modcommandmaxlengh}
 		echo -en "\e[36m${compatiblemodslist[compatiblemodslistindex+1]}\e[0m | "
 		# File Name ${modfilenamemaxlengh}
