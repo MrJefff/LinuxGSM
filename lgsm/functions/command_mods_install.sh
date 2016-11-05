@@ -86,9 +86,9 @@ fn_mod_add_list(){
 		fn_script_log "Created ${modslockfilefullpath}"
 	fi
 	# Input mod name to lockfile
-	if [ ! -n "$(cat "${modslockfilefullpath}" | grep "${modprettyname}")" ]; then
-		echo "${modprettyname}" >> "${modslockfilefullpath}"
-		fn_script_log "${modprettyname} added to ${modslockfile}"
+	if [ ! -n "$(cat "${modslockfilefullpath}" | grep "${modcommand}")" ]; then
+		echo "${modcommand}" >> "${modslockfilefullpath}"
+		fn_script_log "${modcommand} added to ${modslockfile}"
 	fi
 }
 
