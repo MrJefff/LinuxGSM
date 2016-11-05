@@ -32,8 +32,8 @@ fn_mods_info(){
 	# [4] 	| The output filename, needed for fn_fetch_file
 	# [5]	| modsubfolders, in how many subfolders is the mod
 	# [6]	| modlowercase, LowercaseOff/LowercaseOn : enable/disable converting to lowercase
-	# [7]	| modkeepfiles, files & directories that should not be overwritten upon update : OVERWRITE to ignore the value, NOUPDATE to disallow updating, or "/path/to/folder/;path/to/file"
-	# [8] 	| modinstalldir is the directory in which to install the mode (must use LGSM dir variables)
+	# [7] 	| modinstalldir is the directory in which to install the mode (must use LGSM dir variables)
+	# [8]	| modkeepfiles, files & directories that should not be overwritten upon update : OVERWRITE to ignore the value, NOUPDATE to disallow updating, or "/path/to/folder/;path/to/file"
 	# [9] 	| List all "Supported Engines;" according to LGSM ${engine} variable, all between double quotes, each one separated with a semicolon, or use ENGINES to ignore the value
 	# [10] 	| List all "Supported Games;" according to LGSM ${gamename} variable, all between double quotes, each one separated with a semicolon, or use GAMES to ignore the value 
 	# [11]	| List all "Unsupported Games;", according to LGSM ${gamename} variable, all between double quotes, each one separated with a semicolon, or use NOTGAMES to ignore the value (useful to exclude a game when using [7])
@@ -91,8 +91,8 @@ fi
 	indexmodfilename=$((index+4))
 	indexmodsubfolders=$((index+5))
 	indexmodlowercase=$((index+6))
-	indexmodkeepfiles=$((index+7))
-	indexmodinstalldir=$((index+8))
+	indexmodinstalldir=$((index+7))
+	indexmodkeepfiles=$((index+8))
 	indexmodengines=$((index+9))
 	indexmodgames=$((index+10))
 	indexmodexcludegames=$((index+11))
@@ -108,8 +108,8 @@ fn_mod_info(){
 	modfilename="${mods_global_array[indexmodfilename]}"
 	modsubfolders="${mods_global_array[indexmodsubfolders]}"
 	modlowercase="${mods_global_array[indexmodlowercase]}"
-	modkeepfiles="${mods_global_array[indexmodkeepfiles]}"
 	modinstalldir="${mods_global_array[indexmodinstalldir]}"
+	modkeepfiles="${mods_global_array[indexmodkeepfiles]}"
 	modengines="${mods_global_array[indexmodengines]}"
 	modgames="${mods_global_array[indexmodgames]}"
 	modexcludegames="${mods_global_array[indexmodexcludegames]}"
