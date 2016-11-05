@@ -45,6 +45,8 @@ fn_mods_info(){
 	mod_info_utime=( MOD utime "UTime" "https://github.com/TeamUlysses/utime/archive/master.zip" utime-master.zip "${systemdir}/addons" "NA" "Garry's Mod;" "NA" "http://ulyssesmod.net" )
 	mod_info_uclip=( MOD uclip "UClib" "https://github.com/TeamUlysses/uclip/archive/master.zip" uclip-master.zip "${systemdir}/addons" "NA" "Garry's Mod;" "NA" "http://ulyssesmod.net" )
 	mod_info_acf=( MOD acf "Armoured Combat Framework" "https://github.com/nrlulz/ACF/archive/master.zip" acf-master.zip "${systemdir}/addons" "NA" "Garry's Mod;" "NA" "https://github.com/nrlulz/ACF" )
+	mod_info_darkrp=( MOD darkrp "DarkRP Gamemode" "https://github.com/FPtje/DarkRP/archive/master.zip" darkrp-master.zip "${systemdir}/addons" "NA" "Garry's Mod;" "NA" "http://darkrp.com" )
+	mod_info_darkrpmodification=( MOD darkrpmodification "DarkRP Modification" "https://github.com/FPtje/DarkRP/archive/master.zip" darkrpmodification-master.zip "${systemdir}/addons" "NA" "Garry's Mod;" "NA" "http://darkrp.com" )
 	# Oxidemod
 	mod_info_rustoxide=( MOD rustoxide "Oxide for Rust" "https://raw.githubusercontent.com/OxideMod/Snapshots/master/Oxide-Rust.zip" Oxide-Rust_Linux.zip "${systemdir}" "NA" "Rust;" "NA" "http://oxidemod.org/downloads/oxide-for-rust.1659" )
 	mod_info_hwoxide=( MOD hwoxide "Oxide for Hurtworld" "https://raw.githubusercontent.com/OxideMod/Snapshots/master/Oxide-Hurtworld.zip" Oxide-Hurtworld_Linux.zip "${systemdir}" "NA" "Hurtworld;" "NA" "http://oxidemod.org/downloads/oxide-for-hurtworld.1332" )
