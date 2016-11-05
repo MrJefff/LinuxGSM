@@ -22,35 +22,38 @@ modseparator="MOD"
 
 # Define mods information (required)
 fn_mods_info(){
-	# REQUIRED: mod_info_name=( MOD modcommand "Pretty Name" "URL" filename "${installdir}" "Supported Engines;" "Supported Games;" "Unsupported Games;" "AUTHOR_URL")
+	# REQUIRED: mod_info_name=( MOD modcommand "Pretty Name" "URL" filename "modsubfolders" "LCON/LCOFF" "/mod/keep/files;" "${installdir}" "SupportedEngines;" "Supported Games;" "Unsupported Games;" "AUTHOR_URL" )
 	# None of those values can be empty
 	# [index]	| Usage
 	# [0] 	| MOD is a separator and is value [O] of the array
-	# [1] 	| modcommand is the LGSM command and name for the mod (must be unique)
+	# [1] 	| modcommand, the LGSM command and name for the mod (must be unique)
 	# [2] 	| "Pretty Name" is the common name people use to call the mod, should be in double quotes
 	# [3] 	| URL to download the file. Can be a variable defined in fn_mods_nasty_urls, double quote is for a better look
 	# [4] 	| The output filename, needed for fn_fetch_file
-	# [5] 	| ${installdir} must use LGSM dir variables
-	# [6] 	| List all "Supported Engines" according to LGSM ${engine} variable, all between double quotes, each one separated with a semicolon, or use NA to ignore the value
-	# [7] 	| List all "Supported Games" according to LGSM ${gamename} variable, all between double quotes, each one separated with a semicolon, or use NA to ignore the value 
-	# [8]	| List all "Unsupported Games", all between double quotes, each one separated with a semicolon, or use NA to ignore the value (useful to exclude a game when using [7])
-	# [9]	| "AUTHOR_URL" is the author's website, displayed when chosing mods to install, double quote is for a better look
+	# [5]	| modsubfolders, in how many subfolders is the mod
+	# [6]	| modlowercase, LowercaseOff/LowercaseOn : enable/disable converting to lowercase
+	# [7]	| modkeepfiles, files & directories that should not be overwritten upon update : OVERWRITE to ignore the value, NOUPDATE to disallow updating, or "/path/to/folder/;path/to/file"
+	# [8] 	| modinstalldir is the directory in which to install the mode (must use LGSM dir variables)
+	# [9] 	| List all "Supported Engines;" according to LGSM ${engine} variable, all between double quotes, each one separated with a semicolon, or use ENGINES to ignore the value
+	# [10] 	| List all "Supported Games;" according to LGSM ${gamename} variable, all between double quotes, each one separated with a semicolon, or use GAMES to ignore the value 
+	# [11]	| List all "Unsupported Games;", according to LGSM ${gamename} variable, all between double quotes, each one separated with a semicolon, or use NOTGAMES to ignore the value (useful to exclude a game when using [7])
+	# [12]	| "AUTHOR_URL" is the author's website, displayed when chosing mods to install, double quote is for a better look
 
 	# Source mods
-	mod_info_sourcemod=( MOD sourcemod "SourceMod" "${sourcemodurl}" "${sourcemodlatestfile}" "${systemdir}" "source;" "NA" "Garry's Mod;" "http://www.sourcemod.net/" )
-	mod_info_metamod=( MOD metamod "MetaMod" "${metamodurl}" "${metamodlatestfile}" "${systemdir}" "source;" "NA" "Garry's Mod;" "https://www.sourcemm.net/" )
+	mod_info_sourcemod=( MOD sourcemod "SourceMod" "${sourcemodurl}" "${sourcemodlatestfile}" "0" "LowercaseOff" "${systemdir}" "cfg;" "source;" "GAMES" "Garry's Mod;" "http://www.sourcemod.net" )
+	mod_info_metamod=( MOD metamod "MetaMod" "${metamodurl}" "${metamodlatestfile}" "0" "LowercaseOff" "${systemdir}" "OVERWRITE" "source;" "GAMES" "Garry's Mod;" "https://www.sourcemm.net" )
 	# Garry's Mod Addons
-	mod_info_ulib=( MOD ulib "ULib" "https://codeload.github.com/TeamUlysses/ulib/zip/master" ulib-master.zip "${systemdir}/addons" "NA" "Garry's Mod;" "NA" "http://ulyssesmod.net" )
-	mod_info_ulx=( MOD ulx "ULX" "https://codeload.github.com/TeamUlysses/ulx/zip/master" ulx-master.zip "${systemdir}/addons" "NA" "Garry's Mod;" "NA" "http://ulyssesmod.net" )
-	mod_info_utime=( MOD utime "UTime" "https://github.com/TeamUlysses/utime/archive/master.zip" utime-master.zip "${systemdir}/addons" "NA" "Garry's Mod;" "NA" "http://ulyssesmod.net" )
-	mod_info_uclip=( MOD uclip "UClib" "https://github.com/TeamUlysses/uclip/archive/master.zip" uclip-master.zip "${systemdir}/addons" "NA" "Garry's Mod;" "NA" "http://ulyssesmod.net" )
-	mod_info_acf=( MOD acf "Armoured Combat Framework" "https://github.com/nrlulz/ACF/archive/master.zip" acf-master.zip "${systemdir}/addons" "NA" "Garry's Mod;" "NA" "https://github.com/nrlulz/ACF" )
-	mod_info_darkrp=( MOD darkrp "DarkRP Gamemode" "https://github.com/FPtje/DarkRP/archive/master.zip" darkrp-master.zip "${systemdir}/addons" "NA" "Garry's Mod;" "NA" "http://darkrp.com" )
-	mod_info_darkrpmodification=( MOD darkrpmodification "DarkRP Modification" "https://github.com/FPtje/DarkRP/archive/master.zip" darkrpmodification-master.zip "${systemdir}/addons" "NA" "Garry's Mod;" "NA" "http://darkrp.com" )
+	mod_info_ulib=( MOD ulib "ULib" "https://codeload.github.com/TeamUlysses/ulib/zip/master" ulib-master.zip "0" "LowercaseOff" "${systemdir}/addons" "OVERWRITE" "ENGINES" "Garry's Mod;" "NOTGAMES" "http://ulyssesmod.net" )
+	mod_info_ulx=( MOD ulx "ULX" "https://codeload.github.com/TeamUlysses/ulx/zip/master" ulx-master.zip "0" "LowercaseOff" "${systemdir}/addons" "OVERWRITE" "ENGINES" "Garry's Mod;" "NOTGAMES" "http://ulyssesmod.net" )
+	mod_info_utime=( MOD utime "UTime" "https://github.com/TeamUlysses/utime/archive/master.zip" utime-master.zip "0" "LowercaseOff" "${systemdir}/addons" "OVERWRITE" "ENGINES" "Garry's Mod;" "NOTGAMES" "http://ulyssesmod.net" )
+	mod_info_uclip=( MOD uclip "UClib" "https://github.com/TeamUlysses/uclip/archive/master.zip" uclip-master.zip "0" "LowercaseOff" "${systemdir}/addons" "OVERWRITE" "ENGINES" "Garry's Mod;" "NOTGAMES" "http://ulyssesmod.net" )
+	mod_info_acf=( MOD acf "Armoured Combat Framework" "https://github.com/nrlulz/ACF/archive/master.zip" acf-master.zip "0" "LowercaseOn" "${systemdir}/addons" "OVERWRITE" "ENGINES" "Garry's Mod;" "NOTGAMES" "https://github.com/nrlulz/ACF" )
+	mod_info_darkrp=( MOD darkrp "DarkRP Gamemode" "https://github.com/FPtje/DarkRP/archive/master.zip" darkrp-master.zip "0" "LowercaseOn" "${systemdir}/addons" "OVERWRITE" "ENGINES" "Garry's Mod;" "NOTGAMES" "http://darkrp.com" )
+	mod_info_darkrpmodification=( MOD darkrpmodification "DarkRP Modification" "https://github.com/FPtje/darkrpmodification/archive/master.zip" darkrpmodification-master.zip "0" "LowercaseOff" "${systemdir}/addons" "NOUPDATE" "ENGINES" "Garry's Mod;" "NOTGAMES" "http://darkrp.com" )
 	# Oxidemod
-	mod_info_rustoxide=( MOD rustoxide "Oxide for Rust" "https://raw.githubusercontent.com/OxideMod/Snapshots/master/Oxide-Rust.zip" Oxide-Rust_Linux.zip "${systemdir}" "NA" "Rust;" "NA" "http://oxidemod.org/downloads/oxide-for-rust.1659" )
-	mod_info_hwoxide=( MOD hwoxide "Oxide for Hurtworld" "https://raw.githubusercontent.com/OxideMod/Snapshots/master/Oxide-Hurtworld.zip" Oxide-Hurtworld_Linux.zip "${systemdir}" "NA" "Hurtworld;" "NA" "http://oxidemod.org/downloads/oxide-for-hurtworld.1332" )
-	mod_info_sdtdoxide=( MOD sdtdoxide "Oxide for 7 Days To Die" "https://raw.githubusercontent.com/OxideMod/Snapshots/master/Oxide-7DaysToDie.zip" Oxide-7DaysToDie_Linux.zip "${systemdir}" "NA" "7 Days To Die;" "NA" "http://oxidemod.org/downloads/oxide-for-7-days-to-die.813" )
+	mod_info_rustoxide=( MOD rustoxide "Oxide for Rust" "https://raw.githubusercontent.com/OxideMod/Snapshots/master/Oxide-Rust.zip" Oxide-Rust_Linux.zip "0" "LowercaseOff" "${systemdir}" "OVERWRITE" "ENGINES" "Rust;" "NOTGAMES" "http://oxidemod.org/downloads/oxide-for-rust.1659" )
+	mod_info_hwoxide=( MOD hwoxide "Oxide for Hurtworld" "https://raw.githubusercontent.com/OxideMod/Snapshots/master/Oxide-Hurtworld.zip" Oxide-Hurtworld_Linux.zip "0" "LowercaseOff" "${systemdir}" "OVERWRITE" "ENGINES" "Hurtworld;" "NOTGAMES" "http://oxidemod.org/downloads/oxide-for-hurtworld.1332" )
+	mod_info_sdtdoxide=( MOD sdtdoxide "Oxide for 7 Days To Die" "https://raw.githubusercontent.com/OxideMod/Snapshots/master/Oxide-7DaysToDie.zip" Oxide-7DaysToDie_Linux.zip "0" "LowercaseOff" "${systemdir}" "OVERWRITE" "ENGINES" "7 Days To Die;" "NOTGAMES" "http://oxidemod.org/downloads/oxide-for-7-days-to-die.813" )
 
 	# REQUIRED: Set all mods info into one array for convenience
 	mods_global_array=( "${mod_info_sourcemod[@]}" "${mod_info_metamod[@]}" "${mod_info_ulib[@]}" "${mod_info_ulx[@]}" "${mod_info_utime[@]}" "${mod_info_uclip[@]}" "${mod_info_acf[@]}" "${mod_info_darkrp[@]}" "${mod_info_darkrpmodification[@]}" "${mod_info_rustoxide[@]}" "${mod_info_hwoxide[@]}" "${mod_info_sdtdoxide[@]}" )
@@ -86,11 +89,14 @@ fi
 	indexmodprettyname=$((index+2))
 	indexmodurl=$((index+3))
 	indexmodfilename=$((index+4))
-	indexmodinstalldir=$((index+5))
-	indexmodengines=$((index+6))
-	indexmodgames=$((index+7))
-	indexmodexcludegames=$((index+8))
-	indexmodsite=$((index+9))
+	indexmodsubfolders=$((index+5))
+	indexmodlowercase=$((index+6))
+	indexmodkeepfiles=$((index+7))
+	indexmodinstalldir=$((index+8))
+	indexmodengines=$((index+9))
+	indexmodgames=$((index+10))
+	indexmodexcludegames=$((index+11))
+	indexmodsite=$((index+12))
 }
 
 # Define all variables from a mod at once when index is set to a separator
@@ -100,6 +106,9 @@ fn_mod_info(){
 	modprettyname="${mods_global_array[indexmodprettyname]}"
 	modurl="${mods_global_array[indexmodurl]}"
 	modfilename="${mods_global_array[indexmodfilename]}"
+	modsubfolders="${mods_global_array[indexmodsubfolders]}"
+	modlowercase="${mods_global_array[indexmodlowercase]}"
+	modkeepfiles="${mods_global_array[indexmodkeepfiles]}"
 	modinstalldir="${mods_global_array[indexmodinstalldir]}"
 	modengines="${mods_global_array[indexmodengines]}"
 	modgames="${mods_global_array[indexmodgames]}"
@@ -112,8 +121,8 @@ fn_mod_info(){
 fn_compatible_mod_games(){
 	# Reset test value
 	modcompatiblegame="0"
-	# If value is set to NA (ignore)
-	if [ "${modgames}" != "NA" ]; then
+	# If value is set to GAMES (ignore)
+	if [ "${modgames}" != "GAMES" ]; then
 		# How many games we need to test
 		gamesamount="$(echo "${modgames}" | awk -F ';' '{ print NF }')"
 		# Test all subvalue of "modgames" using the ";" separator
@@ -133,8 +142,8 @@ fn_compatible_mod_games(){
 fn_compatible_mod_engines(){
 	# Reset test value
 	modcompatibleengine="0"
-	# If value is set to NA (ignore)
-	if [ "${modengines}" != "NA" ]; then
+	# If value is set to ENGINES (ignore)
+	if [ "${modengines}" != "ENGINES" ]; then
 		# How many engines we need to test
 		enginesamount="$(echo "${modengines}" | awk -F ';' '{ print NF }')"
 		# Test all subvalue of "modengines" using the ";" separator
@@ -154,8 +163,8 @@ fn_compatible_mod_engines(){
 fn_not_compatible_mod_games(){
 	# Reset test value
 	modeincompatiblegame="0"
-	# If value is set to NA (ignore)
-	if [ "${modexcludegames}" != "NA" ]; then
+	# If value is set to NOTGAMES (ignore)
+	if [ "${modexcludegames}" != "NOTGAMES" ]; then
 		# How many engines we need to test
 		excludegamesamount="$(echo "${modexcludegames}" | awk -F ';' '{ print NF }')"
 		# Test all subvalue of "modexcludegames" using the ";" separator
