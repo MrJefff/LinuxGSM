@@ -74,46 +74,26 @@ fn_mods_nasty_urls(){
 	metamodurl="${metamodfasterurl}/${metamodlatestfile}"
 }
 
-# Define variables relative to index
-# Once the index is set to a separator, variable location is allways the same relative to it
-# We  can then get all useful values from mods
-fn_var_rel_index(){
+# Define all variables from a mod at once when index is set to a separator
+fn_mod_info(){
 # If for some reason no index is set, none of this can work
 if [ -z "$index" ]; then
 	fn_print_error "index variable not set. Please report an issue to LGSM Team."
 	echo "* https://github.com/GameServerManagers/LinuxGSM/issues"
 	core_exit.sh
 fi
-	indexmodseparator=$((index+0))
-	indexmodcommand=$((index+1))
-	indexmodprettyname=$((index+2))
-	indexmodurl=$((index+3))
-	indexmodfilename=$((index+4))
-	indexmodsubfolders=$((index+5))
-	indexmodlowercase=$((index+6))
-	indexmodinstalldir=$((index+7))
-	indexmodkeepfiles=$((index+8))
-	indexmodengines=$((index+9))
-	indexmodgames=$((index+10))
-	indexmodexcludegames=$((index+11))
-	indexmodsite=$((index+12))
-}
-
-# Define all variables from a mod at once when index is set to a separator
-fn_mod_info(){
-	fn_var_rel_index
-	modcommand="${mods_global_array[indexmodcommand]}"
-	modprettyname="${mods_global_array[indexmodprettyname]}"
-	modurl="${mods_global_array[indexmodurl]}"
-	modfilename="${mods_global_array[indexmodfilename]}"
-	modsubfolders="${mods_global_array[indexmodsubfolders]}"
-	modlowercase="${mods_global_array[indexmodlowercase]}"
-	modinstalldir="${mods_global_array[indexmodinstalldir]}"
-	modkeepfiles="${mods_global_array[indexmodkeepfiles]}"
-	modengines="${mods_global_array[indexmodengines]}"
-	modgames="${mods_global_array[indexmodgames]}"
-	modexcludegames="${mods_global_array[indexmodexcludegames]}"
-	modsite="${mods_global_array[indexmodsite]}"
+	modcommand="${mods_global_array[index+1]}"
+	modprettyname="${mods_global_array[index+2]}"
+	modurl="${mods_global_array[index+3]}"
+	modfilename="${mods_global_array[index+4]}"
+	modsubfolders="${mods_global_array[index+5]}"
+	modlowercase="${mods_global_array[index+6]}"
+	modinstalldir="${mods_global_array[index+7]}"
+	modkeepfiles="${mods_global_array[index+8]}"
+	modengines="${mods_global_array[index+9]}"
+	modgames="${mods_global_array[index+10]}"
+	modexcludegames="${mods_global_array[index+11]}"
+	modsite="${mods_global_array[index+12]}"
 }
 
 
@@ -233,7 +213,7 @@ fn_mods_available(){
 
 # Output available mods in a nice way to the user
 fn_mods_show_available(){
-	# Reset index
+	# Set and reset vars
 	compatiblemodslistindex=0
 	spaces=" "
 	# As long as we're within index values
@@ -246,7 +226,7 @@ fn_mods_show_available(){
 		echo -en "${compatiblemodslist[compatiblemodslistindex+2]} | "
 		# Website ${modsitemaxlengh}
 		echo -e "${compatiblemodslist[compatiblemodslistindex+3]}"
-		# Increment the amount of values we just displayed
+		# Increment index from the amount of values we just displayed
 		let "compatiblemodslistindex+=4"
 	done
 }
