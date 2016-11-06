@@ -16,13 +16,12 @@ fn_mods_install_init(){
 	fn_script_log "Entering mods & addons installation"
 	echo "================================="
 	echo "${gamename} mods & addons installation"
+	echo ""
+	# Display available mods from mods_list.sh
+	fn_mods_show_available
+	echo ""
 	# Keep prompting as long as the user input doesn't correspond to an available mod
 	while [[ ! " ${availablemodscommands[@]} " =~ " ${currentmod} " ]]; do
-			echo ""
-			echo "Available mods:"
-			echo ""
-			# Display available mods from mods_list.sh
-			fn_mods_show_available
 			echo -en "Enter a \e[36mmod\e[0m to install (or exit to abort): "
 			read -r currentmod
 			# Exit if user says exit or abort

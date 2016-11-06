@@ -235,8 +235,7 @@ fn_mods_show_available(){
 		displayedmoddescription="${compatiblemodslist[compatiblemodslistindex+3]}"
 		# Output mods to the user
 		echo -e "\e[1m${displayedmodname}\e[0m"
-		echo -e " * ${displayedmoddescription}"
-		echo -e " * ${displayedmodsite}"
+		echo -e " * ${displayedmoddescription} - ${displayedmodsite}"
 		echo -e " * \e[36m${displayedmodcommand}\e[0m"
 		# Increment index from the amount of values we just displayed
 		let "compatiblemodslistindex+=4"
