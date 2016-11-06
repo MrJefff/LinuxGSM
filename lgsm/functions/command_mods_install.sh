@@ -41,6 +41,8 @@ fn_mods_install_init(){
 	fn_print_dots "Installing ${modprettyname}"
 	sleep 1
 	fn_script_log "Installing ${modprettyname}."
+	# Proceed to installation
+	fn_mod_installation
 }
 
 # Create mods directory if it doesn't exist
@@ -107,6 +109,17 @@ fn_mod_copy_destination(){
 	cp -rf "${extractdir}/*" "${modinstalldir}"
 }
 
+# Check if the mod is already installed and warn the user
+fn_mod_already_installed(){
+	if [ -f "${modslockfilefullpath}" ]; then
+		if [ -n "$(cat "${modslockfilefullpath}" | grep "${modcommand}")" ]; then
+			fn_print_warning_nl "${modprettyname} has already been installed."
+			echo " * Every mod files will be overwritten."
+			sleep 4
+		fi
+	fi
+}
+
 # Add the mod to the installed mods list
 fn_mod_add_list(){
 	# Create lgsm/data directory
@@ -128,6 +141,10 @@ fn_mod_add_list(){
 
 # Run all required operation
 fn_mod_installation(){
+	# Check if mod is already installed
+	fn_mod_already_installed
+	# Check and create required directories
+	fn_mods_dir
 	# Get mod info
 	fn_mod_get_all_info
 	# Clear lgsm/tmp/mods dir if exists then recreate it
@@ -150,6 +167,3 @@ fn_mod_installation(){
 
 fn_mods_install_checks
 fn_mods_install_init
-fn_mods_dir
-fn_mod_installation
-fn_mod_add_list
