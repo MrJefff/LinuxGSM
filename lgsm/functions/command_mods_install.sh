@@ -111,8 +111,9 @@ fn_mod_copy_destination(){
 fn_mod_already_installed(){
 	if [ -f "${modslockfilefullpath}" ]; then
 		if [ -n "$(cat "${modslockfilefullpath}" | grep "${modcommand}")" ]; then
+			echo ""
 			fn_print_warning_nl "${modprettyname} has already been installed."
-			echo " * Every mod files will be overwritten."
+			echo " * Mod files will be overwritten."
 			sleep 4
 		fi
 	fi
