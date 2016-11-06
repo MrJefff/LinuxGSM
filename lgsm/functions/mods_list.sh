@@ -17,9 +17,9 @@ check.sh
 ## Useful variables
 # Files and Directories
 modstmpdir="${tmpdir}/mods"
-modslockdir="${lgsmdir}/data/mods"
+modsdatadir="${lgsmdir}/data/mods"
 modslockfile="installed-mods-listing"
-modslockfilefullpath="${modslockdir}/${modslockfile}"
+modslockfilefullpath="${modsdatadir}/${modslockfile}"
 # Separator name
 modseparator="MOD"
 
@@ -27,7 +27,7 @@ modseparator="MOD"
 fn_mods_info(){
 	# REQUIRED: mod_info_name=( MOD "modcommand" "Pretty Name" "URL" "filename" "modsubfolders" "LowercaseOn/Off" "/files/to/keep;" "/install/path" "ENGINES" "GAMES" "NOTGAMES" "AUTHOR_URL" "Short Description" )
 	# Example 1) Well made mod: mod_info_name=( MOD "awesomemod" "This is an Awesome Mod" "https://awesomemod.com/latest.zip" "awesomemod.zip" "0" "LowercaseOff" "OVERWRITE" "${systemdir}/addons" "source;unity3d;" "GAMES" "NOTGAMES" "https://awesomemod.com/" "This mod knows that 42 is the answer" )
-	# Example 2) Poorly made mod: mod_info_name=( MOD "stupidmod" "This is a stupid mod" "${crappymodurl}" "StupidMod.zip" "1" "LowercaseOn" "cfg;data/crappymod;" "${systemdir}" "source;" "GAMES" "Garry's mod;Counter-Strike: Source;" "This mod is dumber than dumb" )
+	# Example 2) Poorly made mod: mod_info_name=( MOD "stupidmod" "This is a stupid mod" "${crappymodurl}" "StupidMod.zip" "2" "LowercaseOn" "cfg;data/crappymod;" "${systemdir}" "source;" "GAMES" "Garry's mod;Counter-Strike: Source;" "This mod is dumber than dumb" )
 	# None of those values can be empty
 	# [index]	| Usage
 	# [0] 	| MOD: separator, all mods must begin with it
@@ -35,7 +35,7 @@ fn_mods_info(){
 	# [2] 	| "Pretty Name": the common name people use to call the mod that will be displayed to the user
 	# [3] 	| "URL": link to the file; can be a variable defined in fn_mods_nasty_urls (make sure curl can download it)
 	# [4] 	| "filename": the output filename
-	# [5]	| "modsubfolders": in how many subfolders is the mod (most of the time, none, so use 0)
+	# [5]	| "modsubfolders": in how many subfolders is the mod (none is 1)
 	# [6]	| "LowercaseOn/Off": LowercaseOff or LowercaseOn: enable/disable converting extracted files and directories to lowercase (some games require it)
 	# [7] 	| "modinstalldir": the directory in which to install the mode ( use LGSM dir variables such as ${systemdir})
 	# [8]	| "/files/to/keep;", files & directories that should not be overwritten upon update, separated and ended with a semicolon; you can also use "OVERWRITE" to ignore the value or "NOUPDATE" to disallow updating

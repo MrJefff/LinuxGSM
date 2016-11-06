@@ -71,12 +71,48 @@ fn_mods_tmpdir(){
 	fi
 }
 
+fn_mod_dl(){
+	# fn_fetch_file "${fileurl}" "${filedir}" "${filename}" "${executecmd}" "${run}" "${force}" "${md5}"
+	fileurl="${modurl}"
+	filedir="${modstmpdir}"
+	filename="${modfilename}" 
+	fn_script_log "Downloading mods to ${modstmpdir}"
+	fn_fetch_file "${fileurl}" "${filedir}" "${filename}"
+	# Check if variable is valid checking if file has been downloaded and exists
+	if [ ! -f "${modstmpdir}/${modfilename}" ]; then
+		fn_print_fail "An issue occurred upon downloading ${modprettyname}"
+		core_exit.sh
+	fi
+}
+
+fn_mod_extract(){
+	# fn_dl_extract "${filedir}" "${filename}" "${extractdir}"
+	filename="${modfilename}"
+	extractdir="${modstmpdir}/extracted"
+	if [ ! -d "${extractdir}" ]; then
+		mkdir -p "${extractdir}"
+	fi
+	fn_script_log "Extracting ${modprettyname} to ${extractdir}"
+	fn_dl_extract "${filedir}" "${filename}" "${extractdir}"
+}
+
+fn_mod_fileslist(){
+	# ${modsdatadir}/${modcommand}-files.list
+	true;
+}
+
+fn_mod_copy_destination(){
+	# Destination directory: ${modinstalldir}
+	fn_script_log "Copying ${modprettyname} to ${modinstalldir}"
+	cp -rf "${extractdir}" "${modinstalldir}"
+}
+
 # Add the mod to the installed mods list
 fn_mod_add_list(){
 	# Create lgsm/data directory
-	if [ ! -d  "${modslockdir}" ]; then
-		mkdir -p "${modslockdir}"
-		fn_script_log "Created ${modslockdir}"
+	if [ ! -d  "${modsdatadir}" ]; then
+		mkdir -p "${modsdatadir}"
+		fn_script_log "Created ${modsdatadir}"
 	fi
 	# Create lgsm/data/${modslockfile}
 	if [ ! -f "${modslockfilefullpath}" ]; then
@@ -90,7 +126,7 @@ fn_mod_add_list(){
 	fi
 }
 
-# Download and extract the mod using core_dl.sh
+# Run all required operation
 fn_mod_installation(){
 	# Get mod info
 	fn_mod_get_all_info
@@ -98,25 +134,16 @@ fn_mod_installation(){
 	fn_clear_tmp_mods
 	fn_mods_tmpdir
 	# Download mod
-	# fn_fetch_file "${fileurl}" "${filedir}" "${filename}" "${executecmd}" "${run}" "${force}" "${md5}"
-	fileurl="${modurl}"
-	filedir="${modstmpdir}"
-	filename="${modfilename}" 
-	fn_script_log "Downloading mods to ${modstmpdir}"
-	fn_fetch_file "${fileurl}" "${filedir}" "${filename}"
-	# Check if variable is valid checking if file has been downloaded and exists
-	if [ ! -f "${modstmpdir}/${modfilename}" ]; then
-		fn_print_fail "An issue occurred upon downloading ${modprettyname}"
-		core_exit.sh
-	fi
+	fn_mod_dl
 	# Extract the mod
-	# fn_dl_extract "${filedir}" "${filename}" "${extractdir}"
-	filename="${modfilename}"
-	extractdir="${modinstalldir}"
-	fn_dl_extract "${filedir}" "${filename}" "${extractdir}"
+	fn_mod_extract
+	# Build a file list
+	fn_mod_fileslist
+	# Copying to destination
+	fn_mod_copy_destination
 	# Ending with installation routines
-	fn_clear_tmp_mods
 	fn_mod_add_list
+	fn_clear_tmp_mods
 	fn_print_ok_nl "${modprettyname} installed."
 	fn_script_log "${modprettyname} installed."
 }
