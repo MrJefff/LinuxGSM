@@ -104,7 +104,7 @@ fn_mod_fileslist(){
 fn_mod_copy_destination(){
 	# Destination directory: ${modinstalldir}
 	fn_script_log "Copying ${modprettyname} to ${modinstalldir}"
-	cp -rf "${extractdir}/*" "${modinstalldir}/"
+	cp -Rf "${extractdir}/." "${modinstalldir}/"
 }
 
 # Check if the mod is already installed and warn the user
