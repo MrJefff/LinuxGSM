@@ -238,9 +238,9 @@ fn_mods_show_available(){
 }
 
 # Get details of a mod any (relevant and unique, such as full mod name or install command) value
-fn_mod_get_all_info(){
+fn_mod_get_info_from_command(){
 	# Variable to know when job is done
-	mod_get_all_info="0"
+	modinfocommand="0"
 	# Find entry in global array
 	for ((index=0; index <= ${#mods_global_array[@]}; index++)); do
 		# When entry is found
@@ -251,13 +251,13 @@ fn_mod_get_all_info(){
 				if [ "${mods_global_array[index]}" == "MOD" ]; then
 					# Get info
 					fn_mod_info
-					mod_get_all_info="1"
+					modinfocommand="1"
 					break
 				fi
 			done
 		fi
 		# Exit the loop if job is done
-		if [ "${mod_get_all_info}" == "1" ]; then
+		if [ "${modinfocommand}" == "1" ]; then
 			break
 		fi
 	done

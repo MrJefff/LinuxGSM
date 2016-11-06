@@ -21,28 +21,26 @@ fn_mods_install_init(){
 	fn_mods_show_available
 	echo ""
 	# Keep prompting as long as the user input doesn't correspond to an available mod
-	while [[ ! " ${availablemodscommands[@]} " =~ " ${currentmod} " ]]; do
+	while [[ ! " ${availablemodscommands[@]} " =~ " ${usermodselect} " ]]; do
 			echo -en "Enter a \e[36mmod\e[0m to install (or exit to abort): "
-			read -r currentmod
+			read -r usermodselect
 			# Exit if user says exit or abort
-			if [ "${currentmod}" == "exit" ]||[ "${currentmod}" == "abort" ]; then
+			if [ "${usermodselect}" == "exit" ]||[ "${usermodselect}" == "abort" ]; then
 					fn_script_log "User aborted."
 					echo "Aborted."
 					core_exit.sh
 			# Supplementary output upon invalid user input 
-			elif [[ ! " ${availablemodscommands[@]} " =~ " ${currentmod} " ]]; then
-				fn_print_error2_nl "${currentmod} is not a valid mod."
+			elif [[ ! " ${availablemodscommands[@]} " =~ " ${usermodselect} " ]]; then
+				fn_print_error2_nl "${usermodselect} is not a valid mod."
 				echo " * Enter a valid mod or input exit to abort."
 			fi
 	done
-
 	# Gives a pretty name to the user and get all mod info
-	fn_mod_get_all_info
+	currentmod="${usermodselect}"
+	fn_mod_get_info_from_command
 	fn_print_dots "Installing ${modprettyname}"
 	sleep 1
 	fn_script_log "Installing ${modprettyname}."
-	# Proceed to installation
-	fn_mod_installation
 }
 
 # Create mods directory if it doesn't exist
@@ -106,7 +104,7 @@ fn_mod_fileslist(){
 fn_mod_copy_destination(){
 	# Destination directory: ${modinstalldir}
 	fn_script_log "Copying ${modprettyname} to ${modinstalldir}"
-	cp -rf "${extractdir}/*" "${modinstalldir}"
+	cp -rf "${extractdir}/*" "${modinstalldir}/"
 }
 
 # Check if the mod is already installed and warn the user
@@ -141,29 +139,36 @@ fn_mod_add_list(){
 
 # Run all required operation
 fn_mod_installation(){
-	# Check if mod is already installed
-	fn_mod_already_installed
-	# Check and create required directories
-	fn_mods_dir
-	# Get mod info
-	fn_mod_get_all_info
-	# Clear lgsm/tmp/mods dir if exists then recreate it
-	fn_clear_tmp_mods
-	fn_mods_tmpdir
-	# Download mod
-	fn_mod_dl
-	# Extract the mod
-	fn_mod_extract
-	# Build a file list
-	fn_mod_fileslist
-	# Copying to destination
-	fn_mod_copy_destination
-	# Ending with installation routines
-	fn_mod_add_list
-	fn_clear_tmp_mods
-	fn_print_ok_nl "${modprettyname} installed."
-	fn_script_log "${modprettyname} installed."
+	# If a mod was selected
+	if [ -n "${currentmod}" ]; then
+		# Get mod info
+		fn_mod_get_info_from_command
+		# Check if mod is already installed
+		fn_mod_already_installed
+		# Check and create required directories
+		fn_mods_dir
+		# Clear lgsm/tmp/mods dir if exists then recreate it
+		fn_clear_tmp_mods
+		fn_mods_tmpdir
+		# Download mod
+		fn_mod_dl
+		# Extract the mod
+		fn_mod_extract
+		# Build a file list
+		fn_mod_fileslist
+		# Copying to destination
+		fn_mod_copy_destination
+		# Ending with installation routines
+		fn_mod_add_list
+		fn_clear_tmp_mods
+		fn_print_ok_nl "${modprettyname} installed."
+		fn_script_log "${modprettyname} installed."
+	else
+		fn_print_fail "No mod was selected."
+		core_exit.sh
+	fi
 }
 
 fn_mods_install_checks
 fn_mods_install_init
+fn_mod_installation
