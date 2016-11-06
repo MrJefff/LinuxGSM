@@ -274,9 +274,9 @@ fn_mods_install_checks(){
 		core_exit.sh
 	# If tompdir variable doesn't exist, LGSM is too old
 	elif [ -z "${tmpdir}" ]||[ -z "${lgsmdir}" ]; then
-			fn_print_fail "Your LGSM version is too old."
-			echo " * Please do a full update, including ${selfname} script."
-			core_exit.sh
+		fn_print_fail "Your LGSM version is too old."
+		echo " * Please do a full update, including ${selfname} script."
+		core_exit.sh
 	fi
 }
 
