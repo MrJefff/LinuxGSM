@@ -211,12 +211,6 @@ fn_mods_available(){
 				compatiblemodslist+=( "${modprettyname}" "${modcommand}" "${modsite}" "${moddescription}" )
 				# Keep available commands in an array
 				availablemodscommands+=( "${modcommand}" )
-				# Find max lengths for user output to be put into nice regular tables
-				modprettynamemaxlength=$((${#modprettyname}>${modprettynamemaxlength}?${#modprettyname}:${modprettynamemaxlength}))
-				modcommandmaxlength=$((${#modcommand}>${modcommandmaxlength}?${#modcommand}:${modcommandmaxlength}))
-				moddescriptionmaxlength=$((${#moddescription}>${moddescriptionmaxlength}?${#moddescription}:${moddescriptionmaxlength}))
-				modsitemaxlength=$((${#modsite}>${modsitemaxlength}?${#modsite}:${modsitemaxlength}))
-			fi
 		fi
 	done
 }
