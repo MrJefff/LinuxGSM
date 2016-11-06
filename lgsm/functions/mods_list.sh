@@ -211,6 +211,7 @@ fn_mods_available(){
 				compatiblemodslist+=( "${modprettyname}" "${modcommand}" "${modsite}" "${moddescription}" )
 				# Keep available commands in an array
 				availablemodscommands+=( "${modcommand}" )
+			fi
 		fi
 	done
 }
