@@ -29,22 +29,18 @@ fn_serveradmin_password_prompt(){
 	done
 	fn_script_log_info "Initiating ${gamename} ServerAdmin password change"
 	read -p "Enter new password : " newpassword
-	}
+}
 
 
-	fn_serveradmin_password_set(){
+fn_serveradmin_password_set(){
 	fn_print_info_nl "Applying new password"
 	fn_script_log_info "Applying new password"
 	sleep 1
-	# Stop any running server
-	command_stop.sh
 	# Start server in "new password mode"
 	ts3serverpass="1"
+	exitbypass="1"
 	fn_print_info_nl "Starting server with new password"
 	command_start.sh
-	# Stop server in "new password mode"
-	command_stop.sh
-	ts3serverpass="0"
 	fn_print_ok_nl "Password applied"
 	fn_script_log_pass "New ServerAdmin password applied"
 	sleep 1
@@ -54,10 +50,17 @@ fn_serveradmin_password_prompt(){
 check.sh
 fn_serveradmin_password_prompt
 check_status.sh
+exitbypass="1"
 if [ "${status}" != "0" ]; then
+	# Stop any running server
+	command_stop.sh
 	fn_serveradmin_password_set
+	exitbypass="1"
 	command_start.sh
+	ts3serverpass="0"
+	command_restart.sh
 else
 	fn_serveradmin_password_set
+	command_stop.sh
 fi
 core_exit.sh
