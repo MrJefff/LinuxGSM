@@ -55,7 +55,7 @@ if [ "${status}" != "0" ]; then
 	command_stop.sh
 	fn_serveradmin_password_set
 	exitbypass="1"
-	command_start.sh
+	command_stop.sh
 	ts3serverpass="0"
 	fn_print_info_nl "Restarting server normally"
 	fn_script_log_info "Restarting server normally"
