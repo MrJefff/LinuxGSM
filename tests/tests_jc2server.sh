@@ -309,13 +309,6 @@ echo ""
 (command_dev_debug.sh)
 fn_test_result_pass
 
-echo "0.3 - detect-ldd"
-echo "================================="
-echo "Description:"
-echo "detect-ldd"
-echo ""
-(command_dev_detect_ldd.sh)
-
 echo "1.0 - start - no files"
 echo "================================="
 echo "Description:"
@@ -355,6 +348,13 @@ echo "Command: ./jc2server auto-install"
 (fn_autoinstall)
 fn_test_result_pass
 
+
+echo "0.3 - detect-ldd"
+echo "================================="
+echo "Description:"
+echo "detect-ldd"
+echo ""
+(command_dev_detect_ldd.sh)
 
 echo ""
 echo "3.1 - start"
