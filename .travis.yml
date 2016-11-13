@@ -12,7 +12,6 @@ addons:
     - ubuntu-toolchain-r-test
     packages:
     - tmux
-    - mailutils
     - postfix 
     - lib32gcc1 
     - libstdc++6 
