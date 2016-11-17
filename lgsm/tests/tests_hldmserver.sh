@@ -321,8 +321,8 @@ echo "test script reaction to missing server files."
 echo "Command: ./jc2server start"
 echo ""
 (command_start.sh)
-#fn_test_result_fail
-fn_test_result_pass
+fn_test_result_fail
+
 echo ""
 echo "1.1 - getopt"
 echo "================================="
