@@ -25,7 +25,7 @@ fi
 echo "Do you want to update oxide (yes/no) ?"
 read answer
 if [ $answer = yes ]
-  then exec /home/rustserver/zipupdater/zipupdater
+  then exec /home/rustdev/zipupdater/zipupdater
 fi
 
 
