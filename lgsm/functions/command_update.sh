@@ -22,5 +22,11 @@ elif [ "${gamename}" == "Mumble" ]; then
 else
 	update_steamcmd.sh
 fi
+echo "Do you want to update oxide (yes/no) ?"
+read answer
+if [ $answer = yes ]
+  then exec /home/rustserver/zipupdater/zipupdater
+fi
+
 
 core_exit.sh
