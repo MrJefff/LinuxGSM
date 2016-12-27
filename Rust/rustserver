@@ -29,7 +29,7 @@ ip="0.0.0.0"
 port="28015"
 rconport="28016"
 rconpassword="CHANGE_ME"
-webrcon="true"
+webrcon="true" # Experimental rcon type has been discontinued, true to use WebRcon
 maxplayers="50"
 # Advanced Start Settings
 seed="" #  default random; range : 1 to 2147483647 ; used to change or reproduce a procedural map
@@ -91,7 +91,8 @@ branch=""
 ## Github Branch Select
 # Allows for the use of different function files
 # from a different repo and/or branch.
-githubuser="GameServerManagers"
+#githubuser="GameServerManagers"
+githubuser="MrJefff"
 githubrepo="LinuxGSM"
 githubbranch="master"
 
