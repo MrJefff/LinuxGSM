@@ -27,6 +27,7 @@ version="161125"
 servername="Rust"
 ip="0.0.0.0"
 port="28015"
+webrcon="true" # Experimental rcon type has been discontinued, true to use WebRcon
 rconport="28016"
 rconpassword="CHANGE_ME"
 maxplayers="50"
@@ -39,7 +40,7 @@ tickrate="30" # default 30; range : 15 to 100
 ## Server Start Command | https://github.com/GameServerManagers/LinuxGSM/wiki/Start-Parameters#additional-parameters
 # Edit with care | https://developer.valvesoftware.com/wiki/Rust_Dedicated_Server
 fn_parms(){
-parms="-batchmode +server.ip ${ip} +server.port ${port} +server.tickrate ${tickrate} +server.hostname \"${servername}\" +server.identity \"${servicename}\" ${conditionalseed} +server.maxplayers ${maxplayers} +server.worldsize ${worldsize} +server.saveinterval ${saveinterval} +rcon.ip ${ip} +rcon.port ${rconport} +rcon.password \"${rconpassword}\" -logfile ${gamelogfile}"
+parms="-batchmode +server.ip ${ip} +server.port ${port} +server.tickrate ${tickrate} +server.hostname \"${servername}\" +server.identity \"${servicename}\" ${conditionalseed} +server.maxplayers ${maxplayers} +server.worldsize ${worldsize} +server.saveinterval ${saveinterval} ${wrcon} +rcon.ip ${ip} +rcon.port ${rconport} +rcon.password \"${rconpassword}\" -logfile ${gamelogfile}"
 }
 
 # Specific to Rust
@@ -146,6 +147,15 @@ gamelogfile="\"gamelog-$(date '+%Y-%m-%d-%H-%M-%S').log\""
 ######## Script ########
 ###### Do not edit #####
 ########################
+
+# WebRcon
+if [ "${webrcon}" = true ]; then
+	# If set, then Enable webrcon
+	wrcon="+rcon.web 1"
+else
+	# Disable webrcon
+	wrcon="+rcon.web 0"
+fi
 
 # Fetches core_dl for file downloads
 fn_fetch_core_dl(){
